@@ -45,7 +45,7 @@ webhooks:
           - "*"
     {{- if .Values.base.validationCABundle }}
     # Disable webhook controller in Pilot to stop patching it
-    failurePolicy: Fail
+    failurePolicy: Ignore
     {{- else }}
     # Fail open until the validation webhook is ready. The webhook controller
     # will update this to `Fail` and patch in the `caBundle` when the webhook
