@@ -17,10 +17,6 @@ spec:
     - group: admissionregistration.k8s.io
       kind: ValidatingWebhookConfiguration
       name: istio-validator-istio-system
-      jsonPointers:
-        - /webhooks/0/clientConfig/caBundle
-        - /metadata/annotations
-        - /metadata/labels
   syncPolicy:
     automated:
       selfHeal: true
