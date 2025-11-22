@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/ahmedabbas96/charts.git
-    path: istio/istio-base
+    path: istio/base
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
