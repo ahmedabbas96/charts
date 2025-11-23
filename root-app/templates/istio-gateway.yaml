@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/ahmedabbas96/charts.git
     path: istio/gateway
-    targetRevision: main
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: default

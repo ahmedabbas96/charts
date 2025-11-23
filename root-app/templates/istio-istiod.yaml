@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/ahmedabbas96/charts.git
     path: istio/istiod
-    targetRevision: main
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system
