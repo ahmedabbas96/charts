@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/ahmedabbas96/charts.git
-    chart: mariadb
+    path: mariadb
     targetRevision: HEAD
     helm:
       values: |-
