@@ -72,7 +72,7 @@ env:
   db:
     user: root
     host: mariadb.default.svc.cluster.local
-    port: "3306"
+    port: 3306
     name: demo_api
   jwtSecretName: go-api-jwt-secret  # k8s Secret name containing JWT_SECRET
 

@@ -6,6 +6,7 @@ metadata:
 spec:
   hosts:
     - github.com
+    - api.github.com
     - ghcr.io
   location: MESH_EXTERNAL
   resolution: DNS

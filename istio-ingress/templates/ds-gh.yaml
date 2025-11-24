@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: github-mtls-disable
+  namespace: istio-system
+spec:
+  host: github.com
+  trafficPolicy:
+    tls:
+      mode: DISABLE
