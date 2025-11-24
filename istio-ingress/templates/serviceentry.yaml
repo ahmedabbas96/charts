@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: github-egress
+  namespace: istio-system
+spec:
+  hosts:
+    - github.com
+    - ghcr.io
+  location: MESH_EXTERNAL
+  resolution: DNS
+  ports:
+    - number: 443
+      name: https
+      protocol: TLS
