@@ -42,7 +42,6 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          {{- with .Values.livenessProbe }}
           env:
             - name: DB_USER
               value: {{ .Values.env.db.user | quote }}
@@ -67,6 +66,7 @@ spec:
                   name: {{ .Values.dbPasswordSecret.name }}
                   key: {{ .Values.dbPasswordSecret.key }}
             {{- end }}
+          {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
