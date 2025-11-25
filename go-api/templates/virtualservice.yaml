@@ -2,10 +2,10 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: go-app-vs
-  namespace: default   # same ns as Service
+  namespace: default   
 spec:
   hosts:
-    - "*"   # must match Gateway hosts
+    - "*"   
   gateways:
     - go-app-gateway
   http:
@@ -14,6 +14,6 @@ spec:
             prefix: /        # all paths
       route:
         - destination:
-            host: go-app.default.svc.cluster.local
+            host: go-api.default.svc.cluster.local
             port:
               number: 8080
