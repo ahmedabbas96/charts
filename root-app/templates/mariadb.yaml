@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/ahmedabbas96/charts.git
     path: mariadb
-    targetRevision: HEAD
+    targetRevision: main
     helm:
       values: |-
         architecture: standalone
