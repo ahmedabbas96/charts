@@ -11,7 +11,7 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /api/v1/
+            prefix: /
       route:
         - destination:
             host: go-api.default.svc.cluster.local
