@@ -18,4 +18,4 @@ spec:
         - destination:
             host: argo-cd-argocd-server.default.svc.cluster.local
             port:
-              number: 443
+              number: 80

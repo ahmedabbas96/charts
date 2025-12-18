@@ -12,8 +12,6 @@ spec:
     - match:
         - uri:
             prefix: /api/v1
-      rewrite:
-        uri: /
       route:
         - destination:
             host: go-api.default.svc.cluster.local
