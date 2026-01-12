@@ -1,0 +1,9 @@
+prometheus:
+  prometheusSpec:
+    remoteWrite:
+      - url: "http://mimir-nginx.mimir.svc:80/api/v1/push"
+
+grafana:
+  enabled: true
+  adminUser: admin
+  adminPassword: admin    # change
