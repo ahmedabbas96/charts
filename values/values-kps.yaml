@@ -1,9 +1,106 @@
-prometheus:
-  prometheusSpec:
-    remoteWrite:
-      - url: "http://mimir-nginx.mimir.svc:80/api/v1/push"
-
 grafana:
   enabled: true
   adminUser: admin
-  adminPassword: admin    # change
+  adminPassword: admin
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+# ---- Alerting stack: disable (big savings) ----
+alertmanager:
+  enabled: false
+
+prometheusOperator:
+  enabled: true
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+# ---- Prometheus: slim ----
+prometheus:
+  enabled: true
+  prometheusSpec:
+    replicas: 1
+    retention: 6h                 # reduce memory/disk
+    scrapeInterval: 30s           # fewer samples
+    evaluationInterval: 30s
+    walCompression: true
+
+    # Remote write to Mimir (keep)
+    remoteWrite:
+      - url: "http://mimir-nginx.mimir.svc:80/api/v1/push"
+
+    resources:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+      limits:
+        cpu: 800m
+        memory: 1Gi
+
+    # Optional: reduce series churn a bit (safe defaults)
+    enableAdminAPI: false
+
+prometheus-node-exporter:
+  enabled: true   
+
+# ---- Big/optional exporters: disable to save a lot ----
+kubeStateMetrics:
+  enabled: true   
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+kube-state-metrics:
+  enabled: true
+
+kubelet:
+  enabled: true
+
+# These often fail / aren’t useful on k3s, and add noise + load:
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeProxy:
+  enabled: false
+etcd:
+  enabled: false
+
+# ---- Disable rules you don’t need (reduces load + objects) ----
+defaultRules:
+  create: true
+  rules:
+    alertmanager: false
+    etcd: false
+    kubeApiserver: true
+    kubeApiserverAvailability: false
+    kubeApiserverError: false
+    kubeApiserverSlos: false
+    kubeControllerManager: false
+    kubeScheduler: false
+    kubeProxy: false
+    kubernetesApps: true
+    kubernetesResources: true
+    kubernetesStorage: true
+    kubernetesSystem: true
+    kubelet: true
+    node: true
+    prometheus: true
+    prometheusOperator: true
+
+# ---- Disable Prometheus Agent / extra CRDs usage if present ----
+prometheusAgent:
+  enabled: false
