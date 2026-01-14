@@ -10,6 +10,13 @@ spec:
     repoURL: https://github.com/ahmedabbas96/charts.git
     path: go-api
     targetRevision: main
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jqPathExpressions:
+        - .spec.template.spec.containers[].livenessProbe
+        - .spec.template.spec.containers[].readinessProbe
+        - .spec.template.spec.containers[].startupProbe
   destination:
     server: https://kubernetes.default.svc
     namespace: default
