@@ -1,0 +1,104 @@
+global:
+  # single-tenant setup (simplest)
+  tenantId: anonymous
+
+# ---- Use bundled MinIO instead of real object storage ----
+minio:
+  enabled: true
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+# ---- Scale everything to 1 replica ----
+distributor:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+ingester:
+  replicas: 1
+  zoneAwareReplication:
+    enabled: false
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 800m
+      memory: 1Gi
+
+querier:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+queryFrontend:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+storeGateway:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+compactor:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+# ---- Disable HA / multi-zone / sharding features ----
+alertmanager:
+  enabled: false
+
+ruler:
+  enabled: false
+
+overrides_exporter:
+  enabled: false
+
+# ---- Reduce internal limits (important on small clusters) ----
+limits:
+  max_global_series_per_user: 200000
+  max_ingestion_rate: 20000
+  max_ingestion_burst_size: 40000
+
+# ---- NGINX gateway (entry point for Prom & Grafana) ----
+nginx:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi

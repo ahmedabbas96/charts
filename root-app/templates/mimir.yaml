@@ -10,7 +10,7 @@ spec:
     path: mimir-distributed                          
     helm:
       valueFiles:
-        - values/values-mimir.yaml                              
+        - ../values/values-mimir.yaml                             
   destination:
     server: https://kubernetes.default.svc
     namespace: mimir                                             
