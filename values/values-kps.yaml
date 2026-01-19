@@ -17,7 +17,7 @@ grafana:
     - name: Mimir
       type: prometheus
       access: proxy
-      url: http://mimir-nginx.mimir.svc:80/prometheus
+      url: http://mimir-gateway.mimir.svc:80/prometheus
       isDefault: false
       jsonData:
         httpMethod: POST
@@ -49,7 +49,7 @@ prometheus:
 
     # Remote write to Mimir (keep)
     remoteWrite:
-      - url: "http://mimir-nginx.mimir.svc:80/api/v1/push"
+      - url: "http://mimir-gateway.mimir.svc:80/api/v1/push"
 
     resources:
       requests:
