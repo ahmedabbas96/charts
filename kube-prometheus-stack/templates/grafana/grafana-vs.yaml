@@ -15,8 +15,6 @@ spec:
         exact: /grafana
     - uri:
         prefix: /grafana/
-    rewrite:
-      uri: /
     route:
     - destination:
         host: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
