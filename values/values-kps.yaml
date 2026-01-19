@@ -9,6 +9,12 @@ grafana:
     limits:
       cpu: 300m
       memory: 256Mi
+  grafana:
+  grafana.ini:
+    server:
+      root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana"
+      serve_from_sub_path: true
+
 
 # ---- Alerting stack: disable (big savings) ----
 alertmanager:

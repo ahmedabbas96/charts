@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: grafana-vs
+  namespace: monitoring
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - default/go-app-gateway         
+  http:
+  - name: grafana
+    match:
+    - uri:
+        exact: /grafana
+    - uri:
+        prefix: /grafana/
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
+        port:
+          number: 80             
