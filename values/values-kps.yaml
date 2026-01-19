@@ -9,11 +9,18 @@ grafana:
     limits:
       cpu: 300m
       memory: 256Mi
-  grafana:
   grafana.ini:
     server:
       root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana"
       serve_from_sub_path: true
+  additionalDataSources:
+    - name: Mimir
+      type: prometheus
+      access: proxy
+      url: http://mimir-nginx.mimir.svc:80/prometheus
+      isDefault: false
+      jsonData:
+        httpMethod: POST
 
 
 # ---- Alerting stack: disable (big savings) ----
